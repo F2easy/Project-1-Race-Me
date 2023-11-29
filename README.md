@@ -25,6 +25,7 @@ This game will be a much shorter and simpiler version of the game Parchisi. It w
 ///// Diagram ////
 
 https://lucid.app/lucidchart/de6d4b90-fc0e-40e2-8ab9-f546dc6513c7/edit?view_items=mUHRQrmXL8jR&invitationId=inv_4a75d79b-5d6f-4c29-8429-a0328431f3ca
+![P1-Img](https://github.com/F2easy/Project-1-Race-Me/assets/101888578/fd3b10b6-ba7b-4092-84a4-ebd7899a59ae)
 
 
 ////Functions / Features /////
