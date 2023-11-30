@@ -43,13 +43,28 @@ header{
    
 }
 
+.winner{
+    background-color: lightblue;
+}
+
 .trap{
     background-color: lightcoral;
+}
+
+.lucky{
+    background-color: green;
 }
 .start{
     background-color: lightgreen;
 
-
-
 }
 
+.player1{
+max-height: 25%;
+max-width:25%;
+}
+
+.player2{
+max-height: 25%;
+max-width:25%;
+}
