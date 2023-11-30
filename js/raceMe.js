@@ -26,10 +26,17 @@ function startGame(){
 }
 
 /*-----Identify and initilize our state Variable---*/
+//starting position
+let postion1 = 0;
+let position2 = 0;
 // Players
-let p1 = document.querySelectorAll('.player1') ; ///Ask if I am selecting these 2 correctly 
-let p2 = document.querySelectorAll('.player2') ;
+const p1 = document.getElementById('.player1') ; ///Ask if I am selecting these 2 correctly 
+const p2 = document.getElementById('.player2') ;
 
+//board and special board spots
+const gameBoard = document.getElementsByClassName("sp"); //grabbing the entire board
+const trapSpot = document.getElementById('trap'); // grabbing the trap spot
+const luckySpot = document.getElementById('lucky'); // grabbing the lucky spot
 
 
 ///Event Listeners
