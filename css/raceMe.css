@@ -68,3 +68,21 @@ max-width:25%;
 max-height: 25%;
 max-width:25%;
 }
+
+button { 
+    justify-self: left;
+    width: 15vmin;
+    margin: 5vmin;
+    color: black;
+    border: whitesmoke);
+    border-radius: 4vmin;
+    font: 5vmin;
+    outline:hover;
+}
+
+button:hover{
+    background-color: red;
+    color: greenyellow;
+
+}
+
