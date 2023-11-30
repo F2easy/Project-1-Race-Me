@@ -1,8 +1,10 @@
+
+
 body {
     background-color: blanchedalmond;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif ;
     height: 100vh;
-    margin:0;
+    text-align: center;
 }
 
 header{
@@ -12,11 +14,42 @@ header{
     margin: 12px;
 }
 
-#sp0{ 
+#sp1{ 
     width:40%;
     height:20%;
-    display:flex;
     border: black;
+    border-radius: 50px;
     margin: 1vmin;
 
 }
+
+.sp{
+   height: 50px;
+   width: 200px;
+   background-color:whitesmoke;
+   text-align: center;
+   margin-left: 50%;
+   border: 1px solid black;
+   
+}
+
+
+
+.reg{
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+   
+}
+
+.trap{
+    background-color: lightcoral;
+}
+.start{
+    background-color: lightgreen;
+
+
+
+}
+
