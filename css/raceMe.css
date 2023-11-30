@@ -1,3 +1,22 @@
 body {
-    background-color: red;
+    background-color: blanchedalmond;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif ;
+    height: 100vh;
+    margin:0;
+}
+
+header{
+    color:burlywood;
+    font-size: 7vmin;
+    letter-spacing: 2vmin;
+    margin: 12px;
+}
+
+#sp0{ 
+    width:40%;
+    height:20%;
+    display:flex;
+    border: black;
+    margin: 1vmin;
+
 }
