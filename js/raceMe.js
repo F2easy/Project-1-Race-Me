@@ -28,8 +28,7 @@ function start(){
 let postion1 = 0;
 let position2 = 0; /// the number in the position can correlate to the Element Id so i can use the position to target ID and use that number for movement
 // Players
-const p1 = document.getElementById('player1') ; ///Ask if I am selecting these 2 correctly 
-const p2 = document.getElementById('player2') ; 
+
 
 
 //board and special board spots
@@ -39,6 +38,10 @@ const gameBoardArr = [0, 0, 0, 0, 0,  0,  0,  0,  0,  0,  0,  0,  0  ] ///  sp0 
 const gameBoard = document.getElementsByClassName("sp"); //grabbing the entire board
 const trapSpot = document.getElementById('trap'); // grabbing the trap spot
 const luckySpot = document.getElementById('lucky'); // grabbing the lucky spot
+
+const runItBackButton = document.querySelector('runItBack')
+const startButton = document.querySelector('start')
+const  rollDiceButton = document.querySelector('rollDice')
 
 
 ///Event Listeners
@@ -72,6 +75,21 @@ const startGame = document.getElementById("run-it");
 // code the startOver logic that goes with trapSpot and capture
 //code the start over button
 // code the diceRoll Button 
+
+const p1 = document.getElementById('player1') ; ///Ask if I am selecting these 2 correctly 
+const p2 = document.getElementById('player2') ; 
+
+const startSpace = document.getElementById('sp0')
+startSpace.append(p1)
+
+console.log("this is p2 or player2", p2)
+console.log("this is p1 or player1",p1)
+
+let turn = 0
+let winner = null
+
+
+
 function init() {
 
 let turn = 0
@@ -91,7 +109,7 @@ function renderBoard(){
  //       console.log(colArr) // this is the value inside the array
 
         //determine the Id of the element
-      //  const cellId = `sp${sptIdx}${" "}${colArr}`  //now we use this ID to select specific DIV's and make something happen to them and store values
+      //  const cellId = `sp${sptIdx}${" "}//${colArr}`  //now we use this ID to select specific DIV's and make something happen to them and store values
         const cellId = `sp${sptIdx}`
         console.log(cellId)                                           //then use render function to make specific changes on the DOM
         
@@ -102,7 +120,16 @@ function renderBoard(){
 })
 }
 
-renderBoard()
+// p1.forEach((player1)=> {
+//     player1.addEventListener()
+// })
+
+function renderControls(){
+    // chnge intitial vis of the runItBack button
+    // asking question if true, do this: 
+    runItBackButton.style.visibility = winner ? 'visible' : 'hidden'
+    
+}
 
 
 

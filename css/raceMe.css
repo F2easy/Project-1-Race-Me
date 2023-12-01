@@ -17,16 +17,10 @@ header{
 #spaces{
     align-items: left;
     margin-right: 14%;
+    flex: content;
 }
 
-#sp1{ 
-    width:40%;
-    height:20%;
-    border: black;
-    border-radius: 50px;
-    margin: 1vmin;
 
-}
 
 .sp{
    height: 50px;
@@ -63,17 +57,21 @@ header{
 
 }
 
-.player1{
-max-height: 25%;
-max-width:25%;
-margin-left: 70%;
-size-adjust: auto;
+#player1{
+    width: 50%;
+    /* max-height: 25%;
+    max-width:25%;
+    margin-left: 70%;
+    size-adjust: auto; */
+}
+#player1 > img{
+    width: 100%;
 }
 
-.player2{
-max-height: 25%;
-max-width:25%;
-margin-left: 25%;
+#player2{
+    max-height: 25%;
+    max-width:25%;
+    margin-left: 25%;
 }
 
 button { 
