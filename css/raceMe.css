@@ -8,10 +8,15 @@ body {
 }
 
 header{
-    color:burlywood;
+    color:brown;
     font-size: 7vmin;
     letter-spacing: 2vmin;
     margin: 12px;
+}
+
+#spaces{
+    align-items: left;
+    margin-right: 14%;
 }
 
 #sp1{ 
@@ -30,7 +35,6 @@ header{
    text-align: center;
    margin-left: 50%;
    border: 1px solid black;
-   
 }
 
 
@@ -62,11 +66,14 @@ header{
 .player1{
 max-height: 25%;
 max-width:25%;
+margin-left: 70%;
+size-adjust: auto;
 }
 
 .player2{
 max-height: 25%;
 max-width:25%;
+margin-left: 25%;
 }
 
 button { 

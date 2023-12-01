@@ -16,7 +16,7 @@ if (rand < .5){
 } else { return "Tails"
 }}
 
-function startGame(){
+function start(){
     const flip = 0;
     diceRoll(flip);
     if (flip == 5 || flip == 3){   // ask if "if statement is good" or while loop would be better
@@ -31,9 +31,11 @@ let postion1 = 0;
 let position2 = 0;
 // Players
 const p1 = document.getElementById('.player1') ; ///Ask if I am selecting these 2 correctly 
-const p2 = document.getElementById('.player2') ;
+const p2 = document.getElementById('.player2') ; 
 
 //board and special board spots
+// const gameBoardArr = [0,0,0,0,0,0,0,0,0,0,0] /// should I make my gameBoard an array or ? and then create a turn function in the game
+
 const gameBoard = document.getElementsByClassName("sp"); //grabbing the entire board
 const trapSpot = document.getElementById('trap'); // grabbing the trap spot
 const luckySpot = document.getElementById('lucky'); // grabbing the lucky spot
@@ -47,9 +49,13 @@ const luckySpot = document.getElementById('lucky'); // grabbing the lucky spot
 
 
 //code the start button
+const startGame = document.getElementById("run-it");
+startGame.addEventListener('click', start()) ///?
+    
 
 //create a function that makes you roll a 5 or 3 in order to start 
 // code the click event listenser
+//startGame.addEventListener("click",function that would start the game) ///
 // code the event listener to capture that also gives the option to either roll again or capture
 // code the event listener for trapSpot
 /// code the event listener for luckSpot
