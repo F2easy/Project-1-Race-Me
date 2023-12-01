@@ -28,8 +28,9 @@ function start(){
 let postion1 = 0;
 let position2 = 0; /// the number in the position can correlate to the Element Id so i can use the position to target ID and use that number for movement
 // Players
-const p1 = document.getElementById('.player1') ; ///Ask if I am selecting these 2 correctly 
-const p2 = document.getElementById('.player2') ; 
+const p1 = document.getElementById('player1') ; ///Ask if I am selecting these 2 correctly 
+const p2 = document.getElementById('player2') ; 
+
 
 //board and special board spots
 ///                 sp0 sp1 sp2 sp3 sp4 sp5 sp6 sp7 sp8 sp9 sp10 sp11
@@ -77,7 +78,7 @@ let turn = 0
 let winner = null
 
     ///            sp0 sp1 sp2 sp3 sp4 sp5 sp6 sp7 sp8 sp9 sp10 sp11
-const gameBoardArr = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] ///  sp0 -> start   sp6 -> luckySpot  sp7 --> Trap Spot sp11 --> winning spot
+const gameBoardArr = [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] ///  sp0 -> start   sp6 -> luckySpot  sp7 --> Trap Spot sp11 --> winning spot
 
 // Call the render Function once the the RENDER is created
 }
@@ -96,6 +97,8 @@ function renderBoard(){
         
         const CellEl = document.getElementById(cellId)
         console.log('CellEL', CellEl)
+
+        // CellEl.style.backgroundColor=[]
 })
 }
 
