@@ -3,11 +3,7 @@
 
 
 ///functions
-function diceRoll(){  /// roles the dice so players can progress //attach to roll the dice button
-    let p = Math.floor(Math.random() * 6) + 1
-    console.log(p)
-    return p
-};
+
 
 function coinFlip(){   ///this Function flips a coin that ultimately starts the game //attach to run it button
 const rand = Math.random
@@ -24,17 +20,14 @@ function start(){
 }
 
 /*-----Identify and initilize our state Variable---*/
-//starting position
-let postion1 = 0;
-let position2 = 0; /// the number in the position can correlate to the Element Id so i can use the position to target ID and use that number for movement
-// Players
+
 
 
 
 //board and special board spots
 ///                 sp0 sp1 sp2 sp3 sp4 sp5 sp6 sp7 sp8 sp9 sp10 sp11
-const gameBoardArr = [0, 0, 0, 0, 0,  0,  0,  0,  0,  0,  0,  0,  0  ] ///  sp0 -> start   sp6 -> luckySpot  sp7 --> Trap Spot sp11
-
+///const gameBoardArr = [0, 0, 0, 0, 0,  0,  0,  0,  0,  0,  0,  0,  0  ] ///  sp0 -> start   sp6 -> luckySpot  sp7 --> Trap Spot sp11
+const board = ['sp0','sp1','sp2','sp3','sp4','sp5','sp6','sp7','sp8', 'sp9','sp10','sp11' ];
 const gameBoard = document.getElementsByClassName("sp"); //grabbing the entire board
 const trapSpot = document.getElementById('trap'); // grabbing the trap spot
 const luckySpot = document.getElementById('lucky'); // grabbing the lucky spot
@@ -65,16 +58,17 @@ const startGame = document.getElementById("run-it");
 //startGame.addEventListener('click', start()) ///?
     
 
-//create a function that makes you roll a 5 or 3 in order to start 
-// code the click event listenser
-//startGame.addEventListener("click",function that would start the game) ///
-// code the event listener to capture that also gives the option to either roll again or capture
-// code the event listener for trapSpot
-/// code the event listener for luckSpot
-/// code the winning logic
-// code the startOver logic that goes with trapSpot and capture
-//code the start over button
-// code the diceRoll Button 
+//PseudoCode
+//player needs to roll the dice
+
+//Number Appears
+//Number is attached to a variable
+
+//variable determines how many spots a player gets to progress
+// contact the dom to get the divs to move
+// 
+// player progresses based on said variable
+
 
 const p1 = document.getElementById('player1') ; ///Ask if I am selecting these 2 correctly 
 const p2 = document.getElementById('player2') ; 
@@ -82,12 +76,28 @@ const p2 = document.getElementById('player2') ;
 const startSpace = document.getElementById('sp0')
 startSpace.append(p1)
 
+
+
 console.log("this is p2 or player2", p2)
 console.log("this is p1 or player1",p1)
 
 let turn = 0
 let winner = null
 
+function diceRoll(){  /// roles the dice so players can progress //attach to roll the dice button
+    return Math.floor(Math.random() * 6) + 1 ;
+}
+let currentPostion = 0; // position of p1
+//let position2 = 0;  // position of p2
+function movePlayer(){
+    let rollDice = diceRoll();
+    currentPostion += rollDice;
+    if(currentPostion >= board.length){
+        currentPostion -= board.length;
+    }
+    let current = gameBoard[currentPostion]    ///this function rolls the dice and moves players that is selected
+current.append(p1)
+} //However right now it only moves p1 as listed I want to make this function able to move whatever piece it is attached to
 
 
 function init() {
@@ -96,7 +106,7 @@ let turn = 0
 let winner = null
 
     ///            sp0 sp1 sp2 sp3 sp4 sp5 sp6 sp7 sp8 sp9 sp10 sp11
-const gameBoardArr = [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] ///  sp0 -> start   sp6 -> luckySpot  sp7 --> Trap Spot sp11 --> winning spot
+//const gameBoardArr = [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] ///  sp0 -> start   sp6 -> luckySpot  sp7 --> Trap Spot sp11 --> winning spot
 
 // Call the render Function once the the RENDER is created
 }
