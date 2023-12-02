@@ -24,9 +24,7 @@ function start(){
 
 
 
-//board and special board spots
-///                 sp0 sp1 sp2 sp3 sp4 sp5 sp6 sp7 sp8 sp9 sp10 sp11
-///const gameBoardArr = [0, 0, 0, 0, 0,  0,  0,  0,  0,  0,  0,  0,  0  ] ///  sp0 -> start   sp6 -> luckySpot  sp7 --> Trap Spot sp11
+
 const board = ['sp0','sp1','sp2','sp3','sp4','sp5','sp6','sp7','sp8', 'sp9','sp10','sp11' ];
 const gameBoard = document.getElementsByClassName("sp"); //grabbing the entire board
 const trapSpot = document.getElementById('trap'); // grabbing the trap spot
@@ -89,16 +87,17 @@ function diceRoll(){  /// roles the dice so players can progress //attach to rol
 }
 let currentPostion = 0; // position of p1
 //let position2 = 0;  // position of p2
-function movePlayer(){
+function movePlayer(player){
     let rollDice = diceRoll();
     currentPostion += rollDice;
     if(currentPostion >= board.length){
         currentPostion -= board.length;
     }
     let current = gameBoard[currentPostion]    ///this function rolls the dice and moves players that is selected
-current.append(p1)
+current.append(player)
 } //However right now it only moves p1 as listed I want to make this function able to move whatever piece it is attached to
 
+movePlayer() /// if you put p1 or p2 into this function it will move the players to a random block based on the dice role
 
 function init() {
 

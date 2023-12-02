@@ -5,6 +5,7 @@ body {
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif ;
     height: 100vh;
     text-align: center;
+  
 }
 
 header{
@@ -29,6 +30,7 @@ header{
    text-align: center;
    margin-left: 50%;
    border: 1px solid black;
+   
 }
 
 
@@ -70,6 +72,7 @@ header{
 
 #player2{
     width: 50% ;
+    
 }
 
 #player2 > img{
