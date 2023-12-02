@@ -22,17 +22,21 @@ function start(){
 /*-----Identify and initilize our state Variable---*/
 
 
+///state variables
 
-
-
+let turn = 0  // will always be 1 for p1 or 2 for p2 
+let winner = null // will either be p1 or p2
 const board = ['sp0','sp1','sp2','sp3','sp4','sp5','sp6','sp7','sp8', 'sp9','sp10','sp11' ];
+///
+// cached DOM elements
+/// grab our HTML elements and save them to variables to use later
+const messageEl = document.querySelectorAll('h2') 
 const gameBoard = document.getElementsByClassName("sp"); //grabbing the entire board
 const trapSpot = document.getElementById('trap'); // grabbing the trap spot
 const luckySpot = document.getElementById('lucky'); // grabbing the lucky spot
-
-const runItBackButton = document.querySelector('runItBack')
-const startButton = document.querySelector('start')
-const  rollDiceButton = document.querySelector('rollDice')
+const runItBackButton = document.getElementById('runItBack'); //grabbing run it back / restart button
+const startButton = document.getElementById('start') // grabbing start button
+const  rollDiceButton = document.getElementById('rollDice') // grabbing roll the dice button
 
 
 ///Event Listeners
@@ -79,8 +83,7 @@ startSpace.append(p1)
 console.log("this is p2 or player2", p2)
 console.log("this is p1 or player1",p1)
 
-let turn = 0
-let winner = null
+
 
 function diceRoll(){  /// roles the dice so players can progress //attach to roll the dice button
     return Math.floor(Math.random() * 6) + 1 ;
@@ -97,19 +100,15 @@ function movePlayer(player){
 current.append(player)
 } //However right now it only moves p1 as listed I want to make this function able to move whatever piece it is attached to
 
-movePlayer() /// if you put p1 or p2 into this function it will move the players to a random block based on the dice role
+movePlayer(p) /// if you put p1 or p2 into this function it will move the players to a random block based on the dice role
 
+
+// init initialize an empty game and init runs one time whe the dice rolls
+// then the init function will be called again from the the play again / runit back button
 function init() {
-
-let turn = 0
-let winner = null
-
-    ///            sp0 sp1 sp2 sp3 sp4 sp5 sp6 sp7 sp8 sp9 sp10 sp11
-//const gameBoardArr = [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] ///  sp0 -> start   sp6 -> luckySpot  sp7 --> Trap Spot sp11 --> winning spot
-
-// Call the render Function once the the RENDER is created
 }
 
+// renders the game board
 function renderBoard(){
 // loop over array that reperesents the game board                            
 // change the background of the slot to the player image to simulate movement
@@ -119,11 +118,11 @@ function renderBoard(){
 
         //determine the Id of the element
       //  const cellId = `sp${sptIdx}${" "}//${colArr}`  //now we use this ID to select specific DIV's and make something happen to them and store values
-        const cellId = `sp${sptIdx}`
-        console.log(cellId)                                           //then use render function to make specific changes on the DOM
+        // const cellId = `sp${sptIdx}`
+        // console.log(cellId)                                           //then use render function to make specific changes on the DOM
         
-        const CellEl = document.getElementById(cellId)
-        console.log('CellEL', CellEl)
+        // const CellEl = document.getElementById(cellId)
+        // console.log('CellEL', CellEl)
 
         // CellEl.style.backgroundColor=[]
 })
@@ -132,11 +131,27 @@ function renderBoard(){
 // p1.forEach((player1)=> {
 //     player1.addEventListener()
 // })
+// chnge intitial vis of the runItBack button
 
+// render controls --> changes the visibility of the run it back function
+
+// render message  --> will display whose turn it is
+
+// render --> calls all of our render based functions at once
+
+// getWinner --> checks to see if we have a winner / if player lands on final spot
+
+
+//EventListeners
+// use rollDice to start game remember 5 or 3 to start
+// click roll dice to roll dice and advance piece
+// lucky spot consequence
+// trap spot consequence 
+// restart / run it back button
+// player landing on same spot capture or re-roll option
 function renderControls(){
-    // chnge intitial vis of the runItBack button
-    // asking question if true, do this: 
-    runItBackButton.style.visibility = winner ? 'visible' : 'hidden'
+
+
     
 }
 
@@ -149,3 +164,15 @@ function renderControls(){
 function render(){
 
 }
+
+//              Game Logic      ///
+// -StarGame button starts the game
+// - each player is allowed to rolldice until one of them rolls a 5 or 3
+// -whcihever player rolls a 5 or 3 will get to roll again but this time to advance 
+// -depending what # a  player rolls determines the # of spots they get to advance
+// -if a player lands on the trapspot they will have to start over fromm the starting spot
+// - if a player lands on lucky spot they get another turn, rolling again 
+// - if players happen to land on the same spot whichever player landed there second gets to decide whether the other player
+// starts over or if they get to roll again
+// -which ever player makes it to final square is deemed winner 
+
