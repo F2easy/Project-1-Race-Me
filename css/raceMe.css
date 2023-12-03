@@ -21,7 +21,13 @@ header{
     flex: content;
 }
 
+h2{
+   color: blue; 
+}
 
+h3{
+    color: brown
+}
 
 .sp{
 height: 50px;
