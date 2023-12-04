@@ -13,7 +13,7 @@
 let turn = 1 || 2 || null// will always be 1 for p1 or 2 for p2 
 let winner = 1 || 2 || null// will either be p1 or p2 if neither
 const board = ['sp0','sp1','sp2','sp3','sp4','sp5','sp6','sp7','sp8', 'sp9','sp10','sp11' ];
-
+const roll = Math.floor(Math.random() * 6) + 1
 ///
 // cached DOM elements
 /// grab our HTML elements and save them to variables to use later
@@ -24,7 +24,7 @@ const trapSpot = document.getElementById('trap'); // grabbing the trap spot
 const luckySpot = document.getElementById('lucky'); // grabbing the lucky spot
 const restartButton = document.getElementById('runItBack'); //grabbing run it back / restart button
 const startButton = document.getElementById('start') // grabbing start button
-const rollDiceButton = document.getElementById('rollDice') // grabbing roll the dice button
+
 
 
 ///Event Listeners
@@ -38,33 +38,21 @@ const rollDiceButton = document.getElementById('rollDice') // grabbing roll the 
 //     if()
 // }
 
-//these are our constants  and are pertaining to yhe state of our game (staring values)
-// These are the starting point of our game and can be initialized and changed throughout
 
-// to make players move write a function that matches player position to player ID 
 //code the start button
 /// Event Listeners ///
-
+// grabbing the roll-dice button
+const diceDisplay = document.getElementById("rollDice");
+// click event listener
+diceDisplay.addEventListener("click",diceRoll) ;    /// should roll the dice when roll dice button clicked
 //startGame.addEventListener('click', start()) ///?
     
-
-//PseudoCode
-//player needs to roll the dice
-
-//Number Appears
-//Number is attached to a variable
-
-//variable determines how many spots a player gets to progress
-// contact the dom to get the divs to move
-// 
-// player progresses based on said variable
-
 
 const p1 = document.getElementById('player1') ; ///Ask if I am selecting these 2 correctly 
 const p2 = document.getElementById('player2') ; 
 
-const startSpace = document.getElementById('sp0')
-startSpace.append(p1)
+// const startSpace = document.getElementById('sp0')
+// startSpace.append(p1)
 
 
 
@@ -102,25 +90,32 @@ function coinFlip(){   ///this Function flips a coin that ultimately starts the 
     }}
     
     function start(){  
-        let flip = diceRoll()
+        let flip = Math.floor(Math.random() * 6) + 1
         while (!flip == 5 || !flip == 3){   // ask if "if statement is good" or while loop would be better
-            flip = diceRoll() 
+         //   flip = diceRoll() // instead of this we want to shift to the other player's turn.
         }
     }
     
     function diceRoll(){  /// roles the dice so players can progress //attach to roll the dice button
-        return Math.floor(Math.random() * 6) + 1 ;
+          const diceResult = Math.floor(Math.random() * 6) + 1 ;
+       //   return diceResult
+       // displays result in results element
+          //display the dice results in the display element HTML
+          const resultDisplay = document.getElementById("display") ;
+          resultDisplay.textContent = "Result of Roll: " + diceResult;
     }
     let currentPostion = 0; // position of p1
     //let position2 = 0;  // position of p2
     function movePlayer(player){
-        let rollDice = diceRoll();
+        let rollDice = roll;
         currentPostion += rollDice;
         if(currentPostion >= board.length){
             currentPostion -= board.length;
         }
         let current = gameBoard[currentPostion]    ///this function rolls the dice and moves players that is selected
-    current.append(player)
+    current.append(player)                        /// working backwards from the array starting at 0
+    console.log(currentPostion)
+            console.log()
     } //However right now it only moves p1 as listed I want to make this function able to move whatever piece it is attached to
     
     movePlayer() /// if you put p1 or p2 into this function it will move the players to a random block based on the dice role
@@ -181,27 +176,28 @@ function renderMessage() {
         turnEl.innerText = "Start Game !!"
 }
 
+function renderControls(){
+ restartButton.style.visibility = winner ? 'visible' : 'hidden'  // why isn't this working ??
 
-//EventListeners
+
+}
+// handleDrop --> this is the main gameplay function, will determine whose turn it is and who gets to roll 
+function handleDrop(event){
+// check if move is outside the index of array if not move won't count and turn goes to other player
+// if move is valid change turn 
+// after every move check for winner
+// after everymove render the changes
+}
+
+
+
+
 // use rollDice to start game remember 5 or 3 to start
 // click roll dice to roll dice and advance piece
 // lucky spot consequence
 // trap spot consequence 
 // restart / run it back button
 // player landing on same spot capture or re-roll option
-function renderControls(){
- restartButton.style.visibility = winner ? 'visible' : 'hidden'  // why isn't this working ??
-
-
-
-}
-
-
-
-
-
-
-
 
 
 //              Game Logic      ///
@@ -215,3 +211,22 @@ function renderControls(){
 // starts over or if they get to roll again
 // -which ever player makes it to final square is deemed winner 
 
+// this function checks if player landed in trap spot and sends them back to starting spot
+function checkTrap(player){
+     if(currentPostion == 5){
+        currentPosition + 7
+}
+    }
+// this function checks if player landed in lucky spot and awards them with another roll
+function checkLuck(player){    
+     if(currentPostion == 6 && turn != null){
+        currentPostion - 6
+    }
+}                         // will putting these functions in the movePlayer function simulate the whole game ??
+
+function progress() {
+    let rollDice = diceRoll();
+    let newPosition = currentPostion + diceRoll
+    let newSpot
+    return newSpot = board[newPosition]
+}

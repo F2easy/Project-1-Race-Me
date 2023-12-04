@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@100&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/raceMe.css">
+   <script defer src="js/raceMe.js"></script>
+    <title>Race Me</title>
+</head>
+<header>Let's Race!</header>
+<h2>Player 1's turn</h2>
+<h3> Turn </h3>
+<body>
+<!-- section for major column where the race  will take place  0 - 12 since we are going to use an arrray to keep track of all 12 spots-->
+<section id="spaces">
+    <div class="winner sp">
+        <div id="sp12"></div><!--square 12 winning square--> 
+    </div>    
+    <div class="reg">
+        
+        <div class="sp" id="sp11"></div><!--square 11-->
+        <div class="sp" id="sp10"></div><!--square 10-->
+        <div class="sp" id="sp9"></div><!--square 9-->
+        <div class="sp" id="sp8"></div><!--square 8-->
+        <div class="sp trap" id="sp7"></div><!--square 7-->
+        <div class="sp lucky" id="sp6"></div><!--square 6--> 
+        <div class="sp" id="sp5"></div><!--square 5-->   
+        <div class="sp" id="sp4"></div><!--square 4-->
+        <div class="sp" id="sp3"></div><!--square 3-->
+        <div class="sp" id="sp2"></div><!--square 2-->
+        <div class="sp" id="sp1"></div><!--square 1-->
+        <div class="sp" id="sp0">
+            <img id="player1"src=Images/images.jpeg alt=“Tiger/player1” >
+            <img id="player2"src=Images/images-2.png alt=“Gorilla/player2” >
+        </div>
+    </div>
+     
+</section>
+<!--section with a button to play again--> 
+
+    <div id="display"></div>
+ <div> 
+    <button id="runItBack"> Run It Back</button> <!--this button will restart the game-->
+    <button id="start">Start</button> <!--this button will flip the coin to determine who goes first-->
+    <button onclick="diceRoll()" id="rollDice">Roll-Dice</button> <!--this button will roll the dice-->
+</div> 
+</body>
+</html>
