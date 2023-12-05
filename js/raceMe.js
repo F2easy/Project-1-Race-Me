@@ -24,7 +24,7 @@ const player2 = {
 let turn = 1 // will always be 1 for p1 or -1 for p2 
 
 let winner = 1 || 2 || null// will either be p1 or p2 if neither
-const board = ['sp0','sp1','sp2','sp3','sp4','sp5','sp6','sp7','sp8', 'sp9','sp10','sp11' ];
+const board = ['sp0','sp1','sp2','sp3','sp4','sp5','sp6','sp7','sp8', 'sp9','sp10','sp11','sp12' ];
 // const roll = Math.floor(Math.random() * 6) + 1
 gameStarted = false;
 
@@ -59,7 +59,7 @@ const diceDisplay = document.getElementById("rollDice");
 // click event listener
 diceDisplay.addEventListener("click",function(){
     diceRoll()
-    // changeCurrentPlayer()
+
     
 }) ;  /// instead of dice roll 
 // p1.addEventListener("click",palyerClick);
@@ -111,6 +111,7 @@ function startGame() {
 
 
 function changeCurrentPlayer(){
+    // console.log("current player is ", currentPlayer)
     turn = turn === 1 ? 2 : 1;
     console.log(turn)
     if(turn === 1){
@@ -118,6 +119,7 @@ function changeCurrentPlayer(){
     } else{
         currentPlayer = player2
     }
+    console.log("current player is ", currentPlayer)
 }
 
 let roll 
@@ -134,19 +136,18 @@ function diceRoll(){
         if(roll === 5 || roll === 3){
             if(currentPlayer.canPlay==false){
                 currentPlayer.canPlay = true
+                movePlayer(roll)
                 return
             } 
-            movePlayer(roll)
             console.log("is roll always 5 or 3 " + roll )
-            gameStarted = true;
         } else { 
 
-                console.log(currentPlayer + "rolled " + roll)
+                console.log(turn + "rolled " + roll)
         
         } 
     // not going to execute unless gameStarte == false
     } else {
-        // checks if player landed in trapspot and adjust player piece then prints message
+        // checks if player landed in trapspot and adjust player piece then prints message, NOTE move this to the move player function
         if (checkTrap()){
             resultDisplay.textContent="Yikes you landed in the Trap Spot ";
         } else{
@@ -155,8 +156,9 @@ function diceRoll(){
                 resultDisplay.textContent("Nice You landed in the Lucky Spot ")
             }
         } 
-        changeCurrentPlayer()
+        
     }
+    changeCurrentPlayer()
 }
     
 
@@ -167,8 +169,11 @@ function movePlayer(roll){
     // let currentPosition = board.indexOf(`sp${currentPlayer.position}`);
     //console.log(currentPosition)
     let newPosition = currentPlayer.currentPostion + roll;
+    console.log(newPosition + "  currentPlayer.CurrentPostion: " + currentPlayer.currentPostion)
     if(newPosition >= board.length){
-        newPosition -= board.length;
+        // newPosition -= board.length; 
+        // NOTE IF PLAYER GOES OFF THE BOARD MOVE DOES NOT COUNT
+        console.log("Player went off the board")
     }
     let current = gameBoard[newPosition]    ///this function rolls the dice and moves players that is selected
     current.append(currentPlayer.element);              /// working backwards from the array starting at 0
@@ -179,7 +184,7 @@ function movePlayer(roll){
 
 // getWinner --> checks to see if we have a winner / if player lands on final spot
 function renderMessage() {
-    if (winner == 1){
+if (winner == 1){
         messageEl.innerText = " Tiger Wins the Race !!" ;
     }else if (winner === 2) {
         messageEl.innerText = " Bear Wins the Race !!" ;
@@ -195,11 +200,11 @@ if (turn === 1){
 }
 
 function renderControls(){
-    if (winner !== null){
-        restartButton.style.visibility = 'visible';
-    }else {
-        restartButton.style.visibility = 'hidden'
-    }
+if (winner !== null){
+    restartButton.style.visibility = 'visible';
+}else {
+    restartButton.style.visibility = 'hidden'
+}
 }// why isn't this working ??
 
 
@@ -222,12 +227,14 @@ function renderControls(){
 
 
 function checkTrap(player){
+    console.log("Check Trap was hit")
     if(currentPostion == 5){
         return true && currentPosition + 7
     }
 }
 // this function checks if player landed in lucky spot and awards them with another roll
-function checkLuck(player){    
+function checkLuck(player){   
+    console.log("CHECK LUCK WAS HIT !!!") 
     if(currentPostion == 6 && turn != null){
         return true && currentPostion - 6  
         roll()
@@ -235,8 +242,8 @@ function checkLuck(player){
 }                         // will putting these functions in the movePlayer function simulate the whole game ??
 
 function progress() {
-    let rollDice = diceRoll();
-    let newPosition = currentPostion + diceRoll
+    let rollDice = roll
+    let newPosition = currentPostion + rollDice  /// NOTEE
     let newSpot
     return newSpot = board[newPosition]
 }
