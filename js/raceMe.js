@@ -25,7 +25,7 @@ let turn = 1 // will always be 1 for p1 or -1 for p2
 
 let winner = 1 || 2 || null// will either be p1 or p2 if neither
 const board = ['sp0','sp1','sp2','sp3','sp4','sp5','sp6','sp7','sp8', 'sp9','sp10','sp11' ];
-const roll = Math.floor(Math.random() * 6) + 1
+// const roll = Math.floor(Math.random() * 6) + 1
 gameStarted = false;
 
 ///
@@ -59,7 +59,7 @@ const diceDisplay = document.getElementById("rollDice");
 // click event listener
 diceDisplay.addEventListener("click",function(){
     diceRoll()
-    changeCurrentPlayer()
+    // changeCurrentPlayer()
     
 }) ;  /// instead of dice roll 
 // p1.addEventListener("click",palyerClick);
@@ -80,22 +80,22 @@ diceDisplay.addEventListener("click",function(){
 
 function init(){
 
-turn = 1 
-winner = 0 
+    turn = 1 
+    winner = 0 
 
 
 
-render()
+    render()
 }
 
 
 
 // renders the game board
-function renderBoard(){
-// loop over array that reperesents the game board                            
-// change the background of the slot to the player image to simulate movement
+// function renderBoard(){
+// // loop over array that reperesents the game board                            
+// // change the background of the slot to the player image to simulate movement
 
-}
+// }
 ///functions
 let currentPlayer = player1
 
@@ -104,159 +104,103 @@ function startGame() {
     if(!gameStarted){
         gameStarted = true;
         turn = 1
-        console.log(turn)
+        console.log("player "+ turn + " turn")
         console.log(gameStarted)
-}}
+    }
+}
 
 
 function changeCurrentPlayer(){
     turn = turn === 1 ? 2 : 1;
     console.log(turn)
-        if(turn === 1){
-            currentPlayer = player1
-        } else{
-            currentPlayer = player2
-        }
+    if(turn === 1){
+        currentPlayer = player1
+    } else{
+        currentPlayer = player2
+    }
 }
 
-   
+let roll 
 function diceRoll(){ 
-    console.log("turn= " + turn)
+    console.log("player " + turn + " turn")
          /// roles the dice so players can progress //attach to roll the dice button
           // checking whether resulr is 5 or 3 so we can start game 
     if (gameStarted === true){
-  
-    // displays result in results element
-    //display the dice results in the display element HTML
-
-    resultDisplay.textContent = ("Result of Roll: " + roll);
+        roll = Math.floor(Math.random() * 6) + 1
+        // displays result in results element
+        //display the dice results in the display element HTML
+        console.log(roll)
+        resultDisplay.textContent = ("Result of Roll: " + roll);
         if(roll === 5 || roll === 3){
             if(currentPlayer.canPlay==false){
-            currentPlayer.canPlay = true
-            return
+                currentPlayer.canPlay = true
+                return
             } 
             movePlayer(roll)
+            console.log("is roll always 5 or 3 " + roll )
             gameStarted = true;
-            } else { 
+        } else { 
 
-           console.log(currentPlayer)
-            } 
-        } else {
-            // checks if player landed in trapspot and adjust player piece then prints message
-            if (checkTrap()){
+                console.log(currentPlayer + "rolled " + roll)
+        
+        } 
+    // not going to execute unless gameStarte == false
+    } else {
+        // checks if player landed in trapspot and adjust player piece then prints message
+        if (checkTrap()){
             resultDisplay.textContent="Yikes you landed in the Trap Spot ";
-            } else{
+        } else{
             //checks if player landed in luckspot and adjust player piece then prints message
-                if (checkLuck()){
+            if (checkLuck()){
                 resultDisplay.textContent("Nice You landed in the Lucky Spot ")
-                }
-        }
-}}
+            }
+        } 
+        changeCurrentPlayer()
+    }
+}
     
 
 
 
 
-    function movePlayer(roll){
-       // let currentPosition = board.indexOf(`sp${currentPlayer.position}`);
-        //console.log(currentPosition)
-        let newPosition = currentPlayer.currentPostion + roll;
-        if(newPosition >= board.length){
-            newPosition -= board.length;
-        }
-
-        let current = gameBoard[newPosition]    ///this function rolls the dice and moves players that is selected
-   current.append(currentPlayer.element);              /// working backwards from the array starting at 0
-    } //However right now it only moves p1 as listed I want to make this function able to move whatever piece it is attached to
-
-   /// if you put p1 or p2 into this function it will move the players to a random block based on the dice role
-// render()
-// init()
-
-
-// This movePlayer function works but only moves one player and can only be attched to a player
-// let currentPostion = 0; // position of p1
- //let position2 = 0;  // position of p2
-// function movePlayer(player){
-//     let rollDice = roll;
-//     currentPostion += rollDice;
-//     if(currentPostion >= board.length){
-//         currentPostion -= board.length;
-//     }
-//     let current = gameBoard[currentPostion]    ///this function rolls the dice and moves players that is selected
-// current.append(player)                        /// working backwards from the array starting at 0
-// console.log(currentPostion)
-//         console.log()
-// } //However right now it only moves p1 as listed I want to make this function able to move whatever piece it is attached to
-
-// movePlayer()
+function movePlayer(roll){
+    // let currentPosition = board.indexOf(`sp${currentPlayer.position}`);
+    //console.log(currentPosition)
+    let newPosition = currentPlayer.currentPostion + roll;
+    if(newPosition >= board.length){
+        newPosition -= board.length;
+    }
+    let current = gameBoard[newPosition]    ///this function rolls the dice and moves players that is selected
+    current.append(currentPlayer.element);              /// working backwards from the array starting at 0
+} //However right now it only moves p1 as listed I want to make this function able to move whatever piece it is attached to
 
 
 
-
-
-
-// chnge intitial vis of the runItBack button
-
-// render board
-
-
-    board.forEach((colArr, sptIdx) => {
-        const cellId = `sp${sptIdx}` // referring to spots via html name sp0, sp1, sp2 AKA cell ID
-      // console.log(cellId)                                           //then use render function to make specific changes on the DOM
-        const CellEl = document.getElementById(cellId)
-    // console.log('CellEL', CellEl)
-    })
-    
-
-
-// render controls --> changes the visibility of the run it back function
-
-// render message  --> will display whose turn it is
-
-// render --> calls all of our render based functions at once
 
 // getWinner --> checks to see if we have a winner / if player lands on final spot
 function renderMessage() {
     if (winner == 1){
         messageEl.innerText = " Tiger Wins the Race !!" ;
-    } else if (winner === 2) {
+    }else if (winner === 2) {
         messageEl.innerText = " Bear Wins the Race !!" ;
-    
     }else if (winner === null) 
-    messageEl.innerText = " Who is going to win ? !!"  ;
+        messageEl.innerText = " Who is going to win ? !!"  ;
 }
-    if (turn === 1){
-        turnEl.innerText = "Tiger's Turn" ;
-    }
-    else if (turn === 2){
+if (turn === 1){
+    turnEl.innerText = "Tiger's Turn" ;
+    }else if (turn === 2){
         turnEl.innerText = "Bear's Turn" ;
-    }
-    else {
+    }else {
         turnEl.innerText = "Start Game !!" ;
-    }
+}
 
 function renderControls(){
-if (winner !== null){
-    restartButton.style.visibility = 'visible';
-} else {
-    restartButton.style.visibility = 'hidden'
-}}// why isn't this working ??
-
-
-
-// handleDrop --> this is the main gameplay function, will determine whose turn it is and who gets to roll 
-function handleDrop(event){
-// check if move is outside the index of array if not move won't count and turn goes to other player
-// if move is valid change turn 
-// after every move check for winner
-// after everymove render the changes
-
-
-
-}
-
-
+    if (winner !== null){
+        restartButton.style.visibility = 'visible';
+    }else {
+        restartButton.style.visibility = 'hidden'
+    }
+}// why isn't this working ??
 
 
 
@@ -278,15 +222,15 @@ function handleDrop(event){
 
 
 function checkTrap(player){
-if(currentPostion == 5){
-    return true && currentPosition + 7
-}
+    if(currentPostion == 5){
+        return true && currentPosition + 7
     }
+}
 // this function checks if player landed in lucky spot and awards them with another roll
 function checkLuck(player){    
-if(currentPostion == 6 && turn != null){
-    return true && currentPostion - 6  
-    roll()
+    if(currentPostion == 6 && turn != null){
+        return true && currentPostion - 6  
+        roll()
     }
 }                         // will putting these functions in the movePlayer function simulate the whole game ??
 
@@ -299,7 +243,7 @@ function progress() {
 
 function checkWinner(){
     if(player1.currentPostion == 0) {
-        winner ==  1
+            winner ==  1
     }else if
         (player2.currentPosition == 0){
             winner == 2
