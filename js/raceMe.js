@@ -30,7 +30,7 @@ const board = [
   "sp11",
   "sp12",
 ];
-// const roll = Math.floor(Math.random() * 6) + 1
+
 gameStarted = false;
 
 ///
@@ -68,7 +68,7 @@ diceDisplay.addEventListener("click", function () {
 }); 
 
 function limit(num){
-  num <= 13;
+  num < 14;
 }
 
 function init() {
@@ -91,7 +91,7 @@ function startGame() {
   if (!gameStarted) {
     gameStarted = true;
     turn = 1;
-    console.log("player " + turn + " turn");
+    console.log("player's " + turn + " turn");
     console.log(gameStarted);
   }
 }
@@ -99,7 +99,7 @@ function startGame() {
 function changeCurrentPlayer() {
   // console.log("current player is ", currentPlayer)
   turn = turn === 1 ? 2 : 1;
-  console.log(turn);
+  console.log("turn " + turn);
   if (turn === 1) {
     currentPlayer = player1;
   } else {
@@ -110,25 +110,33 @@ function changeCurrentPlayer() {
 
 let roll;
 function diceRoll() {
-  console.log("player " + turn + " turn");
+  console.log("player's " + turn + " turn");
   /// roles the dice so players can progress //attach to roll the dice button
   // checking whether resulr is 5 or 3 so we can start game
+  // if gameStarted is true then the game can officially start and players can progress
   if (gameStarted === true) {
+    // roll simulates the dice rolling and finds a random number 1-6
     roll = Math.floor(Math.random() * 6) + 1;
-    // displays result in results element
-    //display the dice results in the display element HTML
     console.log("roll result ", roll);
+    // will print a message on the screen of the result of the most previous roll
     resultDisplay.textContent = "Result of Roll: " + roll;
+    // checks if the player rolling rolled a 5 or a 3 so they can advance on their following turn
     if (roll === 5 || roll === 3) {
+      // if player rolled 5 or 3 set can play from false to true now allowing progression
       if (currentPlayer.canPlay === false) {
         currentPlayer.canPlay = true;
       }else {
+        // once canPlay is set to true move player function is called with the roll results inside of it telling the player how many spots to move
         movePlayer(roll)
-        console.log(turn + "rolled " + roll);
+        console.log(turn + "rolled " + roll); //prints the turn p1 =1 and p2 =1 followed by the number they rolled
       }
     } else if (currentPlayer.canPlay === true){
+      // checking if player can move and if  they can checks if player's roll is less then 13 which is the lenth of the board
+        if(currentPlayer.currentPosition + roll > 13) {
+          console.log("invalid Move ")
+        }else
+        // if move is valid so the result of the proggresion is less then the size of the board allow player to move
       movePlayer(roll);
-    console.log("current player can play is True")
     }
     // not going to execute unless gameStarte == false
   } else {
@@ -145,28 +153,26 @@ function diceRoll() {
   changeCurrentPlayer();
 }
 
-function movePlayer(roll) {
-  // let currentPosition = board.indexOf(`sp${currentPlayer.position}`);
-  //console.log(currentPosition)
-  console.log(currentPlayer.currentPosition)
- currentPlayer.currentPosition += roll 
+function movePlayer(roll) { // this function is supposed to allow players to progress adding where they are currently at with the result of the dice roll
+  console.log(currentPlayer +"= player and position = " + currentPlayer.currentPosition)
+  //  takes the player's current postion and increments it by the roll they got 
+  currentPlayer.currentPosition += roll 
   
-  console.log(
-      "  currentPlayer.CurrentPostion: " +
-      currentPlayer.currentPosition
-  );
-  if (currentPlayer.currentPosition >= board.length) {
-    // newPosition -= board.length;
+  console.log(" currentPlayer.CurrentPostion: " + currentPlayer.currentPosition);
+// checks if player's move is outside of the scope of the board
+  if (currentPlayer.currentPosition + roll > board.length) {
+
     // NOTE IF PLAYER GOES OFF THE BOARD MOVE DOES NOT COUNT
     console.log("Player went off the board");
-    return
+    return //exits if statement checking scope of the board
   }
+  // checks where the player is reffering it  to the gameboard array
   let current = gameBoard[currentPlayer.currentPosition];
-  console.log("gameboard: ", gameBoard); ///this function rolls the dice and moves players that is selected
+  console.log("gameboard ", gameBoard); 
   current.append(currentPlayer.element);
-  console.log("currentPlayer.element: " + currentPlayer.element);
-  checkWinner()
+  console.log("currentPlayer: " + current);
   checkTrap()
+  checkWinner()
 
 } //However right now it only moves p1 as listed I want to make this function able to move whatever piece it is attached to
 
@@ -208,32 +214,31 @@ function renderControls() {
 // this function checks if player landed in trap spot and sends them back to starting spot
 
 function checkTrap(player) {
-  
-  if (currentPlayer.currentPosition  === 5) {
+  // this function is supposed to check if they player landed at the trapspot then send them to the beggining spot of the game
+  if (currentPlayer.currentPosition  === 5) {  // checking i
     console.log(currentPlayer.currentPosition);
-    currentPlayer.currentPosition = 0;
+    currentPlayer.currentPosition = 0; // this is setting the current postion equal to 0 sending the player back to the starting spot
     console.log("Check Trap was hit");
-    turnEl.innerText = "TRAPP SPOT TO THE BACK YOU GO !"
-  }
+    turnEl.innerText = "TRAP WAS HIT SPOT TO THE BACK YOU GO !" // changing text letting player know they hit the booby trap
+  } ///once player starts back I want the message to go away
 }
 // this function checks if player landed in lucky spot and awards them with another roll
 function checkLuck(player) {
-  
-  if (currentPostion == 6 && turn != null) {
-    return true && currentPostion - 6;
+  if (currentPlayer.currentPostion === 6 && turn != null) {  //checking if player hit the lucky spot
     console.log("CHECK LUCK WAS HIT !!!");
-    roll();
+    roll(), console.log("re-roll"); // roll was awarded to player who hit lucky spot might want to ad a delya
   }
 } // will putting these functions in the movePlayer function simulate the whole game ??
 
-
+// will check if player has hit final spot and increment winner by the player's number and end the
 function checkWinner() {
-  if (player1.currentPostion == 13) {
-    winner == 1 ;
-  } else if (player2.currentPosition == 13) {
-    winner == 2;
+  if (player1.currentPostion === 12) {
+    winner = 1 ;
+    console.log("Winner is ", winner)
+  } else if (player2.currentPosition === 12) {
+    winner = 2;
+    console.log("Winner is ", winner)
   }
-
 }
 
 function render() {
