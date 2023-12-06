@@ -13,7 +13,7 @@ const player2 = {
 };
 
 let turn = 1; // will always be 1 for p1 or -1 for p2
-
+let current;
 let winner = 1 || 2 || null; // will either be p1 or p2 if neither
 const board = [
   "sp0",
@@ -117,6 +117,8 @@ function diceRoll() {
   if (gameStarted === true) {
     // roll simulates the dice rolling and finds a random number 1-6
     roll = Math.floor(Math.random() * 6) + 1;
+    // use this to TEST TRAP SPOT
+   //roll = 5;
     console.log("roll result ", roll);
     // will print a message on the screen of the result of the most previous roll
     resultDisplay.textContent = "Result of Roll: " + roll;
@@ -157,6 +159,8 @@ function movePlayer(roll) { // this function is supposed to allow players to pro
   console.log(currentPlayer +"= player and position = " + currentPlayer.currentPosition)
   //  takes the player's current postion and increments it by the roll they got 
   currentPlayer.currentPosition += roll 
+  current = gameBoard[currentPlayer.currentPosition];
+  current.append(currentPlayer.element);
   
   console.log(" currentPlayer.CurrentPostion: " + currentPlayer.currentPosition);
 // checks if player's move is outside of the scope of the board
@@ -167,11 +171,11 @@ function movePlayer(roll) { // this function is supposed to allow players to pro
     return //exits if statement checking scope of the board
   }
   // checks where the player is reffering it  to the gameboard array
-  let current = gameBoard[currentPlayer.currentPosition];
-  console.log("gameboard ", gameBoard); 
+  current = gameBoard[currentPlayer.currentPosition];
   current.append(currentPlayer.element);
   console.log("currentPlayer: " + current);
   checkTrap()
+  checkLuck()
   checkWinner()
 
 } //However right now it only moves p1 as listed I want to make this function able to move whatever piece it is attached to
@@ -219,14 +223,17 @@ function checkTrap(player) {
     console.log(currentPlayer.currentPosition);
     currentPlayer.currentPosition = 0; // this is setting the current postion equal to 0 sending the player back to the starting spot
     console.log("Check Trap was hit");
+    current = gameBoard[currentPlayer.currentPosition];
+
+    current.append(currentPlayer.element)
     turnEl.innerText = "TRAP WAS HIT SPOT TO THE BACK YOU GO !" // changing text letting player know they hit the booby trap
   } ///once player starts back I want the message to go away
 }
 // this function checks if player landed in lucky spot and awards them with another roll
 function checkLuck(player) {
-  if (currentPlayer.currentPostion === 6 && turn != null) {  //checking if player hit the lucky spot
+  if (currentPlayer.currentPosition === 6 && turn != null) {  //checking if player hit the lucky spot
     console.log("CHECK LUCK WAS HIT !!!");
-    roll(), console.log("re-roll"); // roll was awarded to player who hit lucky spot might want to ad a delya
+    diceRoll(), console.log("re-roll"); // roll was awarded to player who hit lucky spot might want to ad a delya
   }
 } // will putting these functions in the movePlayer function simulate the whole game ??
 
