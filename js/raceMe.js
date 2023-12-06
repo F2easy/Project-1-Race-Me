@@ -47,16 +47,7 @@ const startButton = document
   .addEventListener("click", startGame); // grabbing start button
 const resultDisplay = document.getElementById("display");
 
-///Event Listeners
-//Write a function that matches player position to an element id
-// for example
-// if player position = 0
-// sp1 would have the image in it
-// if player position = 3
-// sp4 would have the image in it (edited)
-// function movePlayer(){
-//     if()
-// }
+
 
 //code the start button
 /// Event Listeners ///
@@ -239,13 +230,18 @@ function checkLuck(player) {
 
 // will check if player has hit final spot and increment winner by the player's number and end the
 function checkWinner() {
+
   if (player1.currentPostion === 12) {
     winner = 1 ;
     console.log("Winner is ", winner)
+    gameStarted = false
+    messageEl.innerText = "Game Over !"
   } else if (player2.currentPosition === 12) {
     winner = 2;
     console.log("Winner is ", winner)
-  }
+    gameStarted = false
+    messageEl.innerText = "Game Over !"
+  } 
 }
 
 function render() {
