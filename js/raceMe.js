@@ -65,16 +65,11 @@ const diceDisplay = document.getElementById("rollDice");
 // click event listener
 diceDisplay.addEventListener("click", function () {
   diceRoll();
-}); /// instead of dice roll
-// p1.addEventListener("click",palyerClick);
-// p2.addEventListener("click",palyerClick);
-//startGame.addEventListener('click', start()) ///?
+}); 
 
-//const startSpace = document.getElementById('sp0')
-//startSpace.append(p1)
-
-// console.log("this is p2 or player2", p2)
-// console.log("this is p1 or player1",p1)
+function limit(num){
+  num <= 13;
+}
 
 function init() {
   turn = 1;
@@ -169,7 +164,10 @@ function movePlayer(roll) {
   let current = gameBoard[currentPlayer.currentPosition];
   console.log("gameboard: ", gameBoard); ///this function rolls the dice and moves players that is selected
   current.append(currentPlayer.element);
-  console.log("currentPlayer.element: " + currentPlayer.element); /// working backwards from the array starting at 0
+  console.log("currentPlayer.element: " + currentPlayer.element);
+  checkWinner()
+  checkTrap()
+
 } //However right now it only moves p1 as listed I want to make this function able to move whatever piece it is attached to
 
 // getWinner --> checks to see if we have a winner / if player lands on final spot
@@ -210,33 +208,32 @@ function renderControls() {
 // this function checks if player landed in trap spot and sends them back to starting spot
 
 function checkTrap(player) {
-  console.log("Check Trap was hit");
-  if (currentPostion == 5) {
-    return true && currentPosition + 7;
+  
+  if (currentPlayer.currentPosition  === 5) {
+    console.log(currentPlayer.currentPosition);
+    currentPlayer.currentPosition = 0;
+    console.log("Check Trap was hit");
+    turnEl.innerText = "TRAPP SPOT TO THE BACK YOU GO !"
   }
 }
 // this function checks if player landed in lucky spot and awards them with another roll
 function checkLuck(player) {
-  console.log("CHECK LUCK WAS HIT !!!");
+  
   if (currentPostion == 6 && turn != null) {
     return true && currentPostion - 6;
+    console.log("CHECK LUCK WAS HIT !!!");
     roll();
   }
 } // will putting these functions in the movePlayer function simulate the whole game ??
 
-function progress() {
-  let rollDice = roll;
-  let newPosition = currentPostion + rollDice; /// NOTEE
-  let newSpot;
-  newSpot = board[newPosition];
-}
 
 function checkWinner() {
-  if (player1.currentPostion == 0) {
-    winner == 1;
-  } else if (player2.currentPosition == 0) {
+  if (player1.currentPostion == 13) {
+    winner == 1 ;
+  } else if (player2.currentPosition == 13) {
     winner == 2;
   }
+
 }
 
 function render() {
