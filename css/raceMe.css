@@ -7,7 +7,7 @@ body {
     text-align: center;
     background-image: url(/Images/jungle.jpg) ;
     background-repeat: no-repeat;
-    background-size: auto;
+    background-size: cover;
 
 }
 
