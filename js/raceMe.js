@@ -67,28 +67,14 @@ function limit(num){
   num < 14;
 }
 
-function init() {
-  turn = 1;
-  winner = 0;
 
-  render();
-}
 
-// renders the game board
-// function renderBoard(){
-// // loop over array that reperesents the game board
-// // change the background of the slot to the player image to simulate movement
-
-// }
-///functions
 let currentPlayer = player1;
 
 function startGame() {
   if (!gameStarted) {
     gameStarted = true;
     turn = 1;
-    console.log("player's " + turn + " turn");
-    console.log(gameStarted);
   }
 }
 
@@ -98,11 +84,12 @@ function changeCurrentPlayer() {
   console.log("turn " + turn);
   if (turn === 1) {
     currentPlayer = player1;
+    turnEl.innerText = "Tiger's Turn";
+
   } else {
     currentPlayer = player2;
+    turnEl.innerText = "Gorilla Turn";
   }
-  console.log("current player is ", currentPlayer);
-  console.log(board.length)
 }
 
 let roll;
@@ -172,7 +159,7 @@ function movePlayer(roll) { // this function is supposed to allow players to pro
   checkLuck()
   checkWinner()
 
-} //However right now it only moves p1 as listed I want to make this function able to move whatever piece it is attached to
+} 
 
 // getWinner --> checks to see if we have a winner / if player lands on final spot
 function renderMessage() {
@@ -182,30 +169,10 @@ function renderMessage() {
     messageEl.innerText = " Bear Wins the Race !!";
   } else if (winner === null) messageEl.innerText = " Who is going to win ? !!";
 }
-if (turn === 1) {
-  turnEl.innerText = "Tiger's Turn";
-} else if (turn === 2) {
-  turnEl.innerText = "Bear's Turn";
-} else {
-  turnEl.innerText = "Start Game !!";
-}
 
 
 
 
-
-// why isn't this working ??
-
-//              Game Logic      ///
-// -StarGame button starts the game
-// - each player is allowed to rolldice until one of them rolls a 5 or 3
-// -whcihever player rolls a 5 or 3 will get to roll again but this time to advance
-// -depending what # a  player rolls determines the # of spots they get to advance
-// -if a player lands on the trapspot they will have to start over fromm the starting spot
-// - if a player lands on lucky spot they get another turn, rolling again
-// - if players happen to land on the same spot whichever player landed there second gets to decide whether the other player
-// starts over or if they get to roll again
-// -which ever player makes it to final square is deemed winner
 
 // this function checks if player landed in trap spot and sends them back to starting spot
 
@@ -214,12 +181,11 @@ function checkTrap(player) {
   if (currentPlayer.currentPosition  === 5) {  // checking i
     setTimeout(function(){
 
-   
+
     console.log(currentPlayer.currentPosition);
     currentPlayer.currentPosition = 0; // this is setting the current postion equal to 0 sending the player back to the starting spot
     console.log("Check Trap was hit");
     current = gameBoard[currentPlayer.currentPosition];
-
     current.append(currentPlayer.element)
     turnEl.innerText = "TRAP WAS HIT SPOT TO THE BACK YOU GO !" // changing text letting player know they hit the booby trap
   },500)
@@ -250,10 +216,3 @@ console.log("player2",player1)
   } 
 }
 
-function render() {
-  // call renderBoard
-  // call renderMessage
-  renderMessage();
-  renderBoard();
-  renderControls();
-}
