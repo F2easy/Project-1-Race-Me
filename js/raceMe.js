@@ -12,6 +12,9 @@ const player2 = {
   element: document.getElementById("player2"),
 };
 
+
+
+
 let turn = 1; // will always be 1 for p1 or -1 for p2
 let current;
 let winner = 1 || 2 || null; // will either be p1 or p2 if neither
@@ -42,11 +45,10 @@ const gameBoard = document.getElementsByClassName("sp"); //grabbing the entire b
 const trapSpot = document.getElementById("trap"); // grabbing the trap spot
 const luckySpot = document.getElementById("lucky"); // grabbing the lucky spot
 const restartButton = document.getElementById("runItBack"); //grabbing run it back / restart button
-const startButton = document
-  .getElementById("start")
+const startButton = document.getElementById("start")
   .addEventListener("click", startGame); // grabbing start button
 const resultDisplay = document.getElementById("display");
-
+restartButton.style.visibility = "hidden";
 
 
 //code the start button
@@ -55,8 +57,11 @@ const resultDisplay = document.getElementById("display");
 const diceDisplay = document.getElementById("rollDice");
 // click event listener
 diceDisplay.addEventListener("click", function () {
-  diceRoll();
-}); 
+  diceRoll();});
+
+restartButton.addEventListener("click", function() {
+
+})
 
 function limit(num){
   num < 14;
@@ -97,6 +102,7 @@ function changeCurrentPlayer() {
     currentPlayer = player2;
   }
   console.log("current player is ", currentPlayer);
+  console.log(board.length)
 }
 
 let roll;
@@ -125,9 +131,7 @@ function diceRoll() {
       }
     } else if (currentPlayer.canPlay === true){
       // checking if player can move and if  they can checks if player's roll is less then 13 which is the lenth of the board
-        if(currentPlayer.currentPosition + roll > 13) {
-          console.log("invalid Move ")
-        }else
+      
         // if move is valid so the result of the proggresion is less then the size of the board allow player to move
       movePlayer(roll);
     }
@@ -149,17 +153,16 @@ function diceRoll() {
 function movePlayer(roll) { // this function is supposed to allow players to progress adding where they are currently at with the result of the dice roll
   console.log(currentPlayer +"= player and position = " + currentPlayer.currentPosition)
   //  takes the player's current postion and increments it by the roll they got 
-  currentPlayer.currentPosition += roll 
-  current = gameBoard[currentPlayer.currentPosition];
-  current.append(currentPlayer.element);
   
   console.log(" currentPlayer.CurrentPostion: " + currentPlayer.currentPosition);
 // checks if player's move is outside of the scope of the board
-  if (currentPlayer.currentPosition + roll > board.length) {
-
+  if (currentPlayer.currentPosition + roll > board.length - 1) {
+    currentPlayer.currentPosition = board.length - 1
     // NOTE IF PLAYER GOES OFF THE BOARD MOVE DOES NOT COUNT
     console.log("Player went off the board");
-    return //exits if statement checking scope of the board
+     //exits if statement checking scope of the board
+  }else {
+      currentPlayer.currentPosition += roll ;
   }
   // checks where the player is reffering it  to the gameboard array
   current = gameBoard[currentPlayer.currentPosition];
@@ -187,13 +190,11 @@ if (turn === 1) {
   turnEl.innerText = "Start Game !!";
 }
 
-function renderControls() {
-  if (winner !== null) {
-    restartButton.style.visibility = "visible";
-  } else {
-    restartButton.style.visibility = "hidden";
-  }
-} // why isn't this working ??
+
+
+
+
+// why isn't this working ??
 
 //              Game Logic      ///
 // -StarGame button starts the game
@@ -211,6 +212,9 @@ function renderControls() {
 function checkTrap(player) {
   // this function is supposed to check if they player landed at the trapspot then send them to the beggining spot of the game
   if (currentPlayer.currentPosition  === 5) {  // checking i
+    setTimeout(function(){
+
+   
     console.log(currentPlayer.currentPosition);
     currentPlayer.currentPosition = 0; // this is setting the current postion equal to 0 sending the player back to the starting spot
     console.log("Check Trap was hit");
@@ -218,6 +222,7 @@ function checkTrap(player) {
 
     current.append(currentPlayer.element)
     turnEl.innerText = "TRAP WAS HIT SPOT TO THE BACK YOU GO !" // changing text letting player know they hit the booby trap
+  },500)
   } ///once player starts back I want the message to go away
 }
 // this function checks if player landed in lucky spot and awards them with another roll
@@ -230,17 +235,18 @@ function checkLuck(player) {
 
 // will check if player has hit final spot and increment winner by the player's number and end the
 function checkWinner() {
-
-  if (player1.currentPostion === 12) {
+console.log("player1",player1)
+console.log("player2",player1)
+  if (player1.currentPosition === 12) {
     winner = 1 ;
     console.log("Winner is ", winner)
-    gameStarted = false
     messageEl.innerText = "Game Over !"
+    gameStarted = false
   } else if (player2.currentPosition === 12) {
     winner = 2;
     console.log("Winner is ", winner)
-    gameStarted = false
     messageEl.innerText = "Game Over !"
+    gameStarted = false
   } 
 }
 

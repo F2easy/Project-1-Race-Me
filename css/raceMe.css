@@ -1,18 +1,22 @@
 
 
 body {
-    background-color: blanchedalmond;
+    /* background-color: blanchedalmond; */
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif ;
     height: 100vh;
     text-align: center;
+    background-image: url(/Images/jungle.jpg) ;
+    background-repeat: no-repeat;
+    background-size: auto;
 
 }
 
 header{
-    color:brown;
+    color:green;
     font-size: 7vmin;
     letter-spacing: 2vmin;
     margin: 12px;
+    font-family: papyrus;
 }
 
 #spaces{
@@ -22,12 +26,13 @@ header{
 }
 
 h2{
-color: blue; 
-
+color: whitesmoke; 
+font-family: papyrus
 }
 
 h3{
-    color: brown;
+    color: whitesmoke;
+    font-family: papyrus
 
 }
 
@@ -114,14 +119,14 @@ button {
     width: 15vmin;
     margin: 5vmin;
     color: black;
-    border: whitesmoke;
+    border: yellowgreen;
     border-radius: 4vmin;
     font: 5vmin;
     outline: hover;
 }
 
 button:hover{
-    background-color: red;
+    background-color: black;
     color: greenyellow;
 
 }
