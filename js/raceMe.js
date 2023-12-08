@@ -43,8 +43,8 @@ const trapSpot = document.getElementById("trap"); // grabbing the trap spot
 const luckySpot = document.getElementById("lucky"); // grabbing the lucky spot
 const restartButton = document.getElementById("runItBack"); //grabbing run it back / restart button
 const startButton = document
-  .getElementById("start")
-  .addEventListener("click", startGame); // grabbing start button
+.getElementById("start")
+.addEventListener("click", startGame); // grabbing start button
 const resultDisplay = document.getElementById("display");
 
 
@@ -88,7 +88,7 @@ function startGame() {
 }
 
 function changeCurrentPlayer() {
-  // console.log("current player is ", currentPlayer)
+
   turn = turn === 1 ? 2 : 1;
   console.log("turn " + turn);
   if (turn === 1) {
